@@ -31,6 +31,7 @@ let typename = ref ""
 let flag_add_defaults = ref false
 let flag_embed_piqi = ref false
 let flag_json_omit_null_fields = ref true
+let flag_json_dash_convert = ref true
 
 
 let usage = "Usage: piqi convert [options] [input file] [output file]\nOptions:"
@@ -52,6 +53,10 @@ let arg__json_omit_null_fields =
     "--json-omit-null-fields", Arg.Bool (fun x -> flag_json_omit_null_fields := x),
     "true|false omit null fields in JSON output (default=true)"
 
+let arg__json_dash_convert =
+    "--json-dash-convert", Arg.Bool (fun x -> flag_json_dash_convert := x),
+    "true|false convert dashes to underscores in json input/output (default=true)"
+
 let arg__gen_extended_piqi_any =
     "--gen-extended-piqi-any", Arg.Set Piqi_config.gen_extended_piqi_any,
     "use extended representation of piqi-any values in XML and JSON output"
@@ -69,6 +74,7 @@ let speclist = Main.common_speclist @
     arg__type;
     arg__add_defaults;
     arg__json_omit_null_fields;
+    arg__json_dash_convert;
     arg__gen_extended_piqi_any;
 
     "--embed-piqi", Arg.Set flag_embed_piqi,
@@ -408,6 +414,7 @@ let convert_file () =
     (Piqi_convert.make_options
       ~json_omit_null_fields:!flag_json_omit_null_fields
       ~use_strict_parsing:!Piqi_config.flag_strict
+      ~json_dash_convert:!flag_json_dash_convert
       ()
     );
   let input_encoding =

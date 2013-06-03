@@ -54,6 +54,7 @@ let set_convert_options args =
     convert_options.Piqi_convert.pretty_print <- args.pretty_print;
     convert_options.Piqi_convert.json_omit_null_fields <- args.json_omit_null_fields;
     convert_options.Piqi_convert.use_strict_parsing <- args.use_strict_parsing;
+    convert_options.Piqi_convert.json_dash_convert <- args.json_dash_convert;
   )
 
 

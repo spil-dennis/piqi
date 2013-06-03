@@ -24,10 +24,13 @@ open C
  * set json- names if not specified by user
  *)
 
+let dash_convert = ref true
 
 (* json name of piqi name *)
 let json_name' n =
-  U.dashes_to_underscores n
+  if !dash_convert
+  then U.dashes_to_underscores n
+  else n 
 
 
 let json_name n =
@@ -52,6 +55,7 @@ let check_json_name s =
       | 'a'..'z'
       | 'A'..'Z'
       | '0'..'9'
+      | '-'
       | '_' -> ()
       | _ -> error ()
   done

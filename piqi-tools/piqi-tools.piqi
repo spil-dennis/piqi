@@ -82,6 +82,14 @@
             .optional
             .default false
         ]
+
+        % Convert dashes to underscores in json encoding
+        .field [
+            .name json-dash-convert
+            .type bool
+            .optional
+            .default true
+        ]
     ]
 
     .output [
